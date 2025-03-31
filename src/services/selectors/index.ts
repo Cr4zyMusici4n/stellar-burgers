@@ -1,0 +1,20 @@
+import { ingredientSlice } from '../slices/ingredients';
+import { orderSlice } from '../slices/order';
+import { userSlice } from '../slices/user';
+
+export const {
+  selectIngredients,
+  selectIsLoading,
+  selectBunIngredients,
+  selectMainIngredients,
+  selectSauceIngredients
+} = ingredientSlice.selectors;
+
+export const {
+  getOrderModalData,
+  getAllOrders,
+  getIsLoading,
+  getOrderRequest
+} = orderSlice.selectors;
+
+export const { selectIsAuth, selectError } = userSlice.selectors;

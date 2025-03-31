@@ -14,16 +14,25 @@ const initialState: TIngredientState = {
 
 export const fetchIngredients = createAsyncThunk(
   'ingredients/getAll',
-  async () => await getIngredientsApi()
+  async () => {
+    const response = await getIngredientsApi();
+    return response;
+  }
 );
 
-const ingredientSlice = createSlice({
+export const ingredientSlice = createSlice({
   name: 'ingredients',
   initialState,
   reducers: {},
   selectors: {
     selectIngredients: (state) => state.ingredients,
-    selectIsLoading: (state) => state.isLoading
+    selectIsLoading: (state) => state.isLoading,
+    selectBunIngredients: (state) =>
+      state.ingredients.filter((ingredient) => ingredient.type === 'bun'),
+    selectMainIngredients: (state) =>
+      state.ingredients.filter((ingredient) => ingredient.type === 'main'),
+    selectSauceIngredients: (state) =>
+      state.ingredients.filter((ingredient) => ingredient.type === 'sauce')
   },
   extraReducers: (builder) => {
     builder
@@ -41,4 +50,3 @@ const ingredientSlice = createSlice({
 });
 
 export default ingredientSlice.reducer;
-export const { selectIngredients, selectIsLoading } = ingredientSlice.selectors;
