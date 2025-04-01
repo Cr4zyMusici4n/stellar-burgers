@@ -20,7 +20,7 @@ export const fetchUser = createAsyncThunk('user/getUser', async () => {
     const response = await getUserApi();
     return response.user;
   } catch (error: any) {
-    return error.message;
+    throw new Error(error.message);
   }
 });
 
