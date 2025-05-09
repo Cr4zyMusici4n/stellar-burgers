@@ -24,6 +24,7 @@ import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { fetchIngredients } from '../../services/slices/ingredients';
 import { fetchUser } from '../../services/slices/user';
+import { AuthRoute } from '../auth-route/auth-route';
 
 const App = () => {
   const location = useLocation();
@@ -34,7 +35,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchIngredients());
     dispatch(fetchUser());
-  }, []);
+  }, [dispatch]);
 
   const onModalClose = () => {
     navigate(-1);
@@ -46,39 +47,40 @@ const App = () => {
       <Routes location={backgroundLocation || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
+
         <Route
           path='/login'
           element={
-            <ProtectedRoute>
+            <AuthRoute>
               <Login />
-            </ProtectedRoute>
+            </AuthRoute>
           }
         />
 
         <Route
           path='/register'
           element={
-            <ProtectedRoute>
+            <AuthRoute>
               <Register />
-            </ProtectedRoute>
+            </AuthRoute>
           }
         />
 
         <Route
           path='/forgot-password'
           element={
-            <ProtectedRoute>
+            <AuthRoute>
               <ForgotPassword />
-            </ProtectedRoute>
+            </AuthRoute>
           }
         />
 
         <Route
           path='/reset-password'
           element={
-            <ProtectedRoute>
+            <AuthRoute>
               <ResetPassword />
-            </ProtectedRoute>
+            </AuthRoute>
           }
         />
 
@@ -111,7 +113,14 @@ const App = () => {
             </div>
           }
         />
-        <Route path='/profile/orders/:number' element={<OrderInfo />} />
+        <Route
+          path='/profile/orders/:number'
+          element={
+            <ProtectedRoute>
+              <OrderInfo />
+            </ProtectedRoute>
+          }
+        />
         <Route path='*' element={<NotFound404 />} />
       </Routes>
 
@@ -120,7 +129,7 @@ const App = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal title='Feed' onClose={onModalClose}>
+              <Modal title='Детали заказа' onClose={onModalClose}>
                 <OrderInfo />
               </Modal>
             }
@@ -136,7 +145,7 @@ const App = () => {
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal title='Orders' onClose={onModalClose}>
+              <Modal title='Детали заказа' onClose={onModalClose}>
                 <OrderInfo />
               </Modal>
             }
