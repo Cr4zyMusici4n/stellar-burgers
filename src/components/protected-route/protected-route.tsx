@@ -4,17 +4,23 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from '../../services/store';
 
 interface ProtectedRouteProps {
+  isAuthPage?: boolean;
   children: React.ReactNode;
 }
 
-export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+export const ProtectedRoute = ({
+  isAuthPage,
+  children
+}: ProtectedRouteProps) => {
   const isAuth = useSelector(selectIsAuth);
   const location = useLocation();
 
-  console.log(location.pathname);
+  if (!isAuth && !isAuthPage) {
+    return <Navigate to='/login' state={{ from: location.pathname }} />;
+  }
 
-  if (!isAuth) {
-    return <Navigate to='/login' state={location.pathname} />;
+  if (isAuth && isAuthPage) {
+    return <Navigate to={location.state?.from ?? '/'} />;
   }
 
   return children;

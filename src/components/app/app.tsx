@@ -24,7 +24,6 @@ import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { fetchIngredients } from '../../services/slices/ingredients';
 import { fetchUser } from '../../services/slices/user';
-import { AuthRoute } from '../auth-route/auth-route';
 
 const App = () => {
   const location = useLocation();
@@ -51,36 +50,36 @@ const App = () => {
         <Route
           path='/login'
           element={
-            <AuthRoute>
+            <ProtectedRoute isAuthPage>
               <Login />
-            </AuthRoute>
+            </ProtectedRoute>
           }
         />
 
         <Route
           path='/register'
           element={
-            <AuthRoute>
+            <ProtectedRoute isAuthPage>
               <Register />
-            </AuthRoute>
+            </ProtectedRoute>
           }
         />
 
         <Route
           path='/forgot-password'
           element={
-            <AuthRoute>
+            <ProtectedRoute isAuthPage>
               <ForgotPassword />
-            </AuthRoute>
+            </ProtectedRoute>
           }
         />
 
         <Route
           path='/reset-password'
           element={
-            <AuthRoute>
+            <ProtectedRoute isAuthPage>
               <ResetPassword />
-            </AuthRoute>
+            </ProtectedRoute>
           }
         />
 
