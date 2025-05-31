@@ -12,7 +12,7 @@ import {
   useSelector as selectorHook
 } from 'react-redux';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   ingredients: ingredientSliceReducer,
   burgerConstructor: constructorSliceReducer,
   order: orderSliceReducer,
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   feed: feedSliceReducer
 });
 
-const store = configureStore({
+export const store = configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production'
 });

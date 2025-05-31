@@ -9,7 +9,7 @@ type TFeedState = {
   totalToday: number;
 };
 
-const initialState: TFeedState = {
+export const initialState: TFeedState = {
   isLoading: false,
   orders: [],
   total: 0,

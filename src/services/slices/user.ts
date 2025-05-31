@@ -18,7 +18,7 @@ type UserState = {
   isLoading: boolean;
 };
 
-const initialState: UserState = {
+export const initialState: UserState = {
   data: null,
   isAuth: false,
   isLoading: false
